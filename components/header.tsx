@@ -46,7 +46,7 @@ export default function Header() {
         <Group>
           <IconCoins size={28} />
           <Text size="xl" style={{ marginLeft: 10 }}>
-            ABCToken
+            coin.new
           </Text>
         </Group>
         <Group gap={5} visibleFrom="xs">
@@ -67,7 +67,7 @@ export default function Header() {
           </ActionIcon>
           <Burger opened={opened} onClick={toggle} hiddenFrom="xs" size="sm" />
           <WalletComponents />
-          <IdentityComponent />
+          {/* <IdentityComponent /> */}
         </Group>
       </Container>
     </header>
