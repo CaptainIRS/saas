@@ -1,10 +1,7 @@
 
 import { Button, Group } from "@mantine/core";
-import { WalletComponents } from "../components/coinbaseWallet";
-import IdentityComponent from "../components/identity";
-import { Address } from "@coinbase/onchainkit/identity";
-import { getAddress } from '@coinbase/onchainkit/identity';
 import { Hero } from "../components/HeroPage";
+
  
 
 
