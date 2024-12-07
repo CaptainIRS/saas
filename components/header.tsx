@@ -1,14 +1,12 @@
 import { useState } from 'react';
-import { Burger, Container, Group } from '@mantine/core';
+import { Burger, Container, Group, Text } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { MantineLogo } from '@mantinex/mantine-logo';
+// import { MantineLogo } from '@mantinex/mantine-logo';
+import {IconCoins} from '@tabler/icons-react';
 import classes from './header.module.css';
 
 const links = [
   { link: '/about', label: 'Features' },
-  { link: '/pricing', label: 'Pricing' },
-  { link: '/learn', label: 'Learn' },
-  { link: '/community', label: 'Community' },
 ];
 
 export default function Header() {
@@ -33,7 +31,13 @@ export default function Header() {
   return (
     <header className={classes.header}>
       <Container size="md" className={classes.inner}>
-        <MantineLogo size={28} />
+        {/* <MantineLogo size={28} /> */}
+        <div>
+        <IconCoins size={28} />
+        <Text size="xl" weight={700} style={{ marginLeft: 10 }}>
+          ABCToken
+        </Text>
+        </div>
         <Group gap={5} visibleFrom="xs">
           {items}
         </Group>
