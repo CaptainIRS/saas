@@ -1,5 +1,5 @@
 'use client'
-import { ReactNode } from 'react';
+import { ReactNode, useState } from 'react';
 import { WagmiProvider, createConfig, http } from 'wagmi';
 import { baseSepolia } from 'wagmi/chains';
 import { coinbaseWallet } from 'wagmi/connectors';
@@ -10,14 +10,14 @@ import {
     WalletDropdown, 
     WalletDropdownDisconnect, 
   } from '@coinbase/onchainkit/wallet';
-// import * as wallet from '@coinbase/onchainkit/src/wallet';
+
   import {
     Address,
     Avatar,
     Name,
     Identity,
   } from '@coinbase/onchainkit/identity';
-  // import * as identity from '@coinbase/onchainkit/esm/identity';
+
   import { color } from '@coinbase/onchainkit/theme';
  
  
@@ -41,9 +41,9 @@ function App({ children }: { children: ReactNode }) {
 export function WalletComponents() {
     return (
       <div className="flex justify-end">
-        <Wallet>
+        <Wallet >
           <ConnectWallet>
-            <Avatar className="h-6 w-6" />
+            <Avatar className="h-6 w-6"/>
             <Name />
           </ConnectWallet>
           <WalletDropdown>
