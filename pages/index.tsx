@@ -1,6 +1,4 @@
 import { Button, Box, Group } from "@mantine/core";
-import { WalletComponents } from "../components/coinbaseWallet";
-import IdentityComponent from "../components/identity";
 import { useState } from "react";
 import { TextInput } from "@mantine/core";
 import classes from "./index.module.css";
@@ -32,9 +30,6 @@ export default function IndexPage() {
           <Button onClick={() => router.push('/create')}>Create</Button>
         </Group>
       </Box>
-
-      <WalletComponents/>
-      <IdentityComponent/>
     </Group>
   );
 }
