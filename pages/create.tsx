@@ -36,7 +36,7 @@ interface ContractData {
 export const compile = (contractCode: string): Promise<ContractData[]> => {
   console.log("compiling");
   return new Promise((resolve, reject) => {
-    const worker = new Worker(new URL("./solc.worker.ts", import.meta.url), {
+    const worker = new Worker(new URL("../components/solc.worker.ts", import.meta.url), {
       type: "module",
     });
     worker.onmessage = function (e: any) {

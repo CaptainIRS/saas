@@ -15,5 +15,4 @@ model Coin {
   name          String
   description   String
   address       String
-  abi           String
 }

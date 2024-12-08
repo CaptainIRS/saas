@@ -57,7 +57,7 @@ function Share() {
 
   return (
     <Container style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-      <Text size="xl" weight={700} mb="md">
+      <Text size="xl" mb="md">
         Your Coin Matters!
       </Text>
 
@@ -86,7 +86,7 @@ function Share() {
         </Button>
       </form>
 
-      <Group spacing="lg" mb="lg">
+      <Group mb="lg">
         <FaTwitter
           size={40}
           color="#1DA1F2"
