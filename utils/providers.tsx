@@ -16,6 +16,7 @@ export function Providers(props: { children: ReactNode }) {
       config={{
         appearance: {
           mode: computedColorScheme,
+          theme: 'cyberpunk'
         }
       }}
     >

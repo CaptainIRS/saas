@@ -3,11 +3,8 @@ import { Group, Stepper } from "@mantine/core";
 
 import { ethers } from "ethers";
 
-import { PrismaClient } from '@prisma/client'
-
-import { useSearchParams } from "next/navigation";
-import { createCoin } from "../app/actions";
-import { describe } from "node:test";
+import { useSearchParams, useRouter } from "next/navigation";
+import axios from "axios";
 
 // import KeyEncoder from 'key-encoder';
 // import util from 'util';
@@ -168,9 +165,24 @@ export default function CreatePage() {
   const [loadings, setLoadings] = useState([true, false, false, false]);
 
   const searchParams = useSearchParams();
+  const router = useRouter();
+
 
   useEffect(() => {
     (async () => {
+      if (!searchParams?.get("token")) {
+        console.log(searchParams);
+        setLoadings((current) => [false, false, false, false]);
+        return;
+      }
+      setLoadings((current) => [true, false, false, false]);
+      // await axios.post("/api/createCoin", {
+      //   address: "ABC",
+      //   description: "",
+      //   name: searchParams?.get("token") || "",
+      //   ticker: searchParams?.get("token") || "",
+      // });
+      // return;
       let contracts;
       try {
         contracts = await compileContract();
@@ -207,17 +219,34 @@ export default function CreatePage() {
       setActive(2);
 
       const finalContract = await deployedContract.waitForDeployment();
-      console.log(finalContract.deploymentTransaction());
+      console.log(await finalContract.getAddress());
       setLoadings((current) => [false, false, false, true]);
       setActive(3);
 
-      createCoin(finalContract.deploymentTransaction()?.to || '', '', searchParams?.get('token') || '', searchParams?.get('token') || '');
+      try {
+        await axios.post("/api/createCoin", {
+          address: (await finalContract.getAddress()) || "",
+          description: "",
+          name: searchParams?.get("token") || "",
+          ticker: searchParams?.get("token") || "",
+        });
+      } catch (e: any) {
+        console.log(e);
+        alert(`Error creating coin: ${e.message}`);
+        setLoadings((current) => [false, false, false, false]);
+        setActive(-1);
+        return;
+      }
 
       setLoadings((current) => [false, false, false, false]);
       setActive(4);
 
+      setTimeout(() => {
+        router.push("/share");
+      }, 1000);
+
     })();
-  }, []);
+  }, [searchParams]);
 
   // useEffect(() => {
   //   (async () => {
