@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next/types";
 
 const prisma = new PrismaClient();
 
-export default async function POST(
+export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
