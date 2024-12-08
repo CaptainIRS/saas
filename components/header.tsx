@@ -13,7 +13,7 @@ import classes from "./header.module.css";
 import { IconSun, IconMoon } from "@tabler/icons-react";
 import cx from "clsx";
 
-const links = [{ link: "/features", label: "Features" }, { link: "/share", label: "Share" }];
+const links = [{ link: "/features", label: "Features" }, { link: "/dashboard", label: "Dashboard" }, { link: "/share", label: "Share" }];
 
 export default function Header() {
   const { setColorScheme } = useMantineColorScheme();
