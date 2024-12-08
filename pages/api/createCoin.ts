@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next/types";
 
 const prisma = new PrismaClient();
 
-export default async function createCoin(
+export default async function POST(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
