@@ -130,3 +130,7 @@ dist
 .pnp.*
 
 .DS_Store
+
+dev.db
+cdp_api_key.json
+*.db-journal

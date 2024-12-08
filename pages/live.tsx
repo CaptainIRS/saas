@@ -1,6 +1,6 @@
 import { Container, Grid, SimpleGrid, Skeleton } from '@mantine/core';
 import TradingView from '../components/tradingView';
-import ERC20Balance from '../components/erc20balance';
+// import ERC20Balance from '../components/erc20balance';
 const PRIMARY_COL_HEIGHT = '300px';
 
 
@@ -14,8 +14,8 @@ export default function LivePage() {
         <TradingView />
         <Grid gutter="md">
           <Grid.Col>
-            {/* <Skeleton height={SECONDARY_COL_HEIGHT} radius="md" animate={false} /> */}
-            <ERC20Balance address='0x1234' />
+            <Skeleton height={SECONDARY_COL_HEIGHT} radius="md" animate={false} />
+            {/* <ERC20Balance address='0x1234' /> */}
           </Grid.Col>
           <Grid.Col span={6}>
             <Skeleton height={SECONDARY_COL_HEIGHT} radius="md" animate={false} />

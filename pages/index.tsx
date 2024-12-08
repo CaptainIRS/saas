@@ -27,7 +27,9 @@ export default function IndexPage() {
           labelProps={{ "data-floating": floating }}
         />
         <Group mt={20} justify="center">
-          <Button onClick={() => router.push('/create')}>Create</Button>
+          <Button onClick={() => {
+            router.push(`/create/?token=${value}`)
+          }}>Create</Button>
         </Group>
       </Box>
     </Group>

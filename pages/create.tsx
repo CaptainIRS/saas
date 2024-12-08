@@ -3,7 +3,11 @@ import { Group, Stepper } from "@mantine/core";
 
 import { ethers } from "ethers";
 
-import erc20 from "../sol/deps/ERC20.sol";
+import { PrismaClient } from '@prisma/client'
+
+import { useSearchParams } from "next/navigation";
+import { createCoin } from "../app/actions";
+import { describe } from "node:test";
 
 // import KeyEncoder from 'key-encoder';
 // import util from 'util';
@@ -161,7 +165,9 @@ contract ERC20 {
 
 export default function CreatePage() {
   const [active, setActive] = useState(0);
-  const [loadings, setLoadings] = useState([true, false, false]);
+  const [loadings, setLoadings] = useState([true, false, false, false]);
+
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     (async () => {
@@ -170,11 +176,11 @@ export default function CreatePage() {
         contracts = await compileContract();
       } catch (e: any) {
         console.log(`Error compiling contract: ${e}`);
-        setLoadings((current) => [false, false, false]);
+        setLoadings((current) => [false, false, false, false]);
         setActive(-1);
         return;
       }
-      setLoadings((current) => [false, true, false]);
+      setLoadings((current) => [false, true, false, false]);
       setActive(1);
 
       let deployedContract;
@@ -193,16 +199,23 @@ export default function CreatePage() {
       } catch (e: any) {
         console.log(e);
         alert(`Error deploying contract: ${e.message}`);
-        setLoadings((current) => [false, false, false]);
+        setLoadings((current) => [false, false, false, false]);
         setActive(-1);
         return;
       }
-      setLoadings((current) => [false, false, true]);
+      setLoadings((current) => [false, false, true, false]);
       setActive(2);
 
-      console.log(deployedContract);
-      setLoadings((current) => [false, false, false]);
+      const finalContract = await deployedContract.waitForDeployment();
+      console.log(finalContract.deploymentTransaction());
+      setLoadings((current) => [false, false, false, true]);
       setActive(3);
+
+      createCoin(finalContract.deploymentTransaction()?.to || '', '', searchParams?.get('token') || '', searchParams?.get('token') || '');
+
+      setLoadings((current) => [false, false, false, false]);
+      setActive(4);
+
     })();
   }, []);
 
@@ -238,13 +251,18 @@ export default function CreatePage() {
         />
         <Stepper.Step
           label="Step 2"
-          description="Deploying the contract"
+          description="Sending the create transaction"
           loading={loadings[1]}
         />
         <Stepper.Step
           label="Step 3"
-          description="Deployed contract"
+          description="Waiting for the contract to be deployed"
           loading={loadings[2]}
+        />
+        <Stepper.Step
+          label="Step 4"
+          description="Contract deployed"
+          loading={loadings[3]}
         />
       </Stepper>
     </Group>

@@ -13,7 +13,7 @@ import classes from "./header.module.css";
 import { IconSun, IconMoon } from "@tabler/icons-react";
 import cx from "clsx";
 
-const links = [{ link: "/features", label: "Features" }];
+const links = [{ link: "/features", label: "Features" }, { link: "/share", label: "Share" }];
 
 export default function Header() {
   const { setColorScheme } = useMantineColorScheme();
@@ -29,9 +29,7 @@ export default function Header() {
       key={link.label}
       href={link.link}
       className={classes.link}
-      data-active={active === link.link || undefined}
       onClick={(event) => {
-        event.preventDefault();
         setActive(link.link);
       }}
     >
@@ -42,7 +40,6 @@ export default function Header() {
   return (
     <header className={classes.header}>
       <Container size="md" className={classes.inner}>
-        {/* <MantineLogo size={28} /> */}
         <Group>
           <IconCoins size={28} />
           <Text size="xl" style={{ marginLeft: 10 }}>
@@ -67,7 +64,6 @@ export default function Header() {
           </ActionIcon>
           <Burger opened={opened} onClick={toggle} hiddenFrom="xs" size="sm" />
           <WalletComponents />
-          {/* <IdentityComponent /> */}
         </Group>
       </Container>
     </header>
